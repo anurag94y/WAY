@@ -14,22 +14,26 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.way.way.R;
+import com.way.way.helper.SessionManagement;
 import com.way.way.http.HttpCalls;
 
 import org.json.JSONObject;
 
-import static com.way.way.Constants.HOST_IP;
-import static com.way.way.Constants.HOST_PORT;
+import static com.way.way.Constants.*;
 
 /**
  * Created by anurag.yadav on 4/13/17.
  */
 
 public class LoginActivity extends Activity {
+
+    SessionManagement session;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        session = new SessionManagement(getApplicationContext());
         final EditText editTextUserName = (EditText) findViewById(R.id.editTextUserNameToLogin);
         final EditText editTextPassword = (EditText) findViewById(R.id.editTextPasswordToLogin);
         final AlphaAnimation inAnimation = new AlphaAnimation(0f, 1f);
@@ -68,6 +72,7 @@ public class LoginActivity extends Activity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("status").equals("Logged")) {
+                                session.CreateLoginSession(userName, "8958807064");
                                 Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
                                 Intent mainActIntent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(mainActIntent);
