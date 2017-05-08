@@ -55,7 +55,7 @@ public class LoginActivity extends Activity {
 
                     @Override
                     protected String doInBackground(Void... params) {
-                        return HttpCalls.getHttp("http://" + HOST_IP + ":" + HOST_PORT + "/login?username=" + userName + "&password=" + password);
+                        return HttpCalls.getHttp("https://" + HOST_IP  + "/login?username=" + userName + "&password=" + password);
                     }
 
                     @Override

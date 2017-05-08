@@ -41,7 +41,7 @@ public class UserLocation {
 
             @Override
             protected String doInBackground(Void... params) {
-                return HttpCalls.getHttp("http://" + HOST_IP + ":" + HOST_PORT + "/location?username=" + username);
+                return HttpCalls.getHttp("http://" + HOST_IP + "/location?username=" + username);
             }
 
             @Override

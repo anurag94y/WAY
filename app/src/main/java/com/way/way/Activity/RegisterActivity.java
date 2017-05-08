@@ -72,7 +72,7 @@ public class RegisterActivity extends Activity{
                 userDetail.setMobileNumber(mobileNumber.getText().toString());
                 userDetail.setUsername(username.getText().toString());
                 userDetail.setPassword(password.getText().toString());
-                final String url = "http://" + HOST_IP + ":" + HOST_PORT + "/register";
+                final String url = "http://" + HOST_IP + "/register";
                 new AsyncTask<Void, Void, String>() {
                     @Override
                     protected void onPreExecute() {

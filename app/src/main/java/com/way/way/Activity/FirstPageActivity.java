@@ -68,7 +68,7 @@ public class FirstPageActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContentResolver contentResolver = getContentResolver();
+                /*ContentResolver contentResolver = getContentResolver();
                 Cursor cursor = null;
                 try {
                     cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
@@ -93,11 +93,11 @@ public class FirstPageActivity extends Activity {
                     }
                     cursor.close();
 
-                }
-                //Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                //startActivityForResult(intent, 1);
-//                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-//                startActivity(loginIntent);
+                }*/
+//                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+//                startActivityForResult(intent, 1);
+                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(loginIntent);
             }
         });
     }
