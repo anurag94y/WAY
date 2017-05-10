@@ -44,11 +44,11 @@ public class FirstPageActivity extends Activity {
         session = new SessionManagement(getApplicationContext());
         System.out.println("Logged in -> " + session.isLoggedIn());
         System.out.println("Logged in -> " + session.getUserDetails().get(SessionManagement.KEY_USERNAME));
-        /*if (session.isLoggedIn()) {
+        if (session.isLoggedIn()) {
             Intent mainActIntent = new Intent(getApplicationContext(), MainActivity.class);
             mainActIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(mainActIntent);
-        }*/
+        }
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;

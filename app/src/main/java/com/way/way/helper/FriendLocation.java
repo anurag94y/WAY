@@ -41,7 +41,7 @@ public class FriendLocation {
                 //System.out.println("Http Response-> " + response.toString());
                 try {
                     Friend friend = new Gson().fromJson(response, Friend.class);
-                    if (friend != null) {
+                    if (friend != null && friend.getFriendList() != null) {
                         for (String friendUsername : friend.getFriendList()) {
                             try {
                                 String friendsLocationResponse = HttpCalls.getHttp("http://" + HOST_IP + "/location?username=" + friendUsername);
@@ -70,7 +70,7 @@ public class FriendLocation {
                 System.out.println("Http Response-> " + response.toString());
                 try {
                     Friend friend = new Gson().fromJson(response, Friend.class);
-                    if (friend != null) {
+                    if (friend != null && friend.getFriendList() != null) {
                         for (String friendUsername : friend.getFriendList()) {
                             try {
                                 String friendLocationResponse = friendsLocationMap.get(friendUsername);
