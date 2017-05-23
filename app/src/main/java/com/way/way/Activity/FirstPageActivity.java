@@ -44,11 +44,11 @@ public class FirstPageActivity extends Activity {
         session = new SessionManagement(getApplicationContext());
         System.out.println("Logged in -> " + session.isLoggedIn());
         System.out.println("Logged in -> " + session.getUserDetails().get(SessionManagement.KEY_USERNAME));
-        /*if (session.isLoggedIn()) {
+        if (session.isLoggedIn()) {
             Intent mainActIntent = new Intent(getApplicationContext(), MainActivity.class);
             mainActIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(mainActIntent);
-        }*/
+        }
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
@@ -79,6 +79,28 @@ public class FirstPageActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*ContentResolver contentResolver = getContentResolver();
+                Cursor cursor = null;
+                try {
+                    cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (cursor != null && cursor.getCount() > 0) {
+                    while (cursor.moveToNext()) {
+                        String contact_id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+                        String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+                        int hasPhoneNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.HAS_PHONE_NUMBER)));
+                        if (hasPhoneNumber > 0) {
+                            Cursor phone = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " - ? ", new String[]{name}, null);
+                            while (phone.moveToNext()) {
+                                String phoneNumber = phone.getString(phone.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                System.out.println(contact_id + " " + name + " " + phoneNumber);
+                            }
+                            phone.close();
+                        }
+                    }
+                }*/
 
                 //Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                 //startActivityForResult(intent, 1);

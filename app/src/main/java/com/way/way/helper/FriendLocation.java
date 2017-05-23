@@ -37,14 +37,14 @@ public class FriendLocation {
 
             @Override
             protected String doInBackground(Void... params) {
-                String response = HttpCalls.getHttp("http://" + HOST_IP + ":" + HOST_PORT + "/friend?username=" + username);
+                String response = HttpCalls.getHttp("http://" + HOST_IP + "/friend?username=" + username);
                 //System.out.println("Http Response-> " + response.toString());
                 try {
                     Friend friend = new Gson().fromJson(response, Friend.class);
-                    if (friend != null) {
+                    if (friend != null && friend.getFriendList() != null) {
                         for (String friendUsername : friend.getFriendList()) {
                             try {
-                                String friendsLocationResponse = HttpCalls.getHttp("http://" + HOST_IP + ":" + HOST_PORT + "/location?username=" + friendUsername);
+                                String friendsLocationResponse = HttpCalls.getHttp("http://" + HOST_IP + "/location?username=" + friendUsername);
                                 //System.out.println("Friend's Username : Response -> " + username + " " + friendsLocationResponse);
                                 friendsLocationMap.put(friendUsername, friendsLocationResponse);
                                 Bitmap bitmap = Picasso.with(context).load("https://image.flaticon.com/teams/new/1-freepik.jpg").get();
@@ -70,7 +70,7 @@ public class FriendLocation {
                 System.out.println("Http Response-> " + response.toString());
                 try {
                     Friend friend = new Gson().fromJson(response, Friend.class);
-                    if (friend != null) {
+                    if (friend != null && friend.getFriendList() != null) {
                         for (String friendUsername : friend.getFriendList()) {
                             try {
                                 String friendLocationResponse = friendsLocationMap.get(friendUsername);

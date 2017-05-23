@@ -36,9 +36,6 @@ public class LoginActivity extends Activity {
         session = new SessionManagement(getApplicationContext());
         final EditText editTextUserName = (EditText) findViewById(R.id.editTextUserNameToLogin);
         final EditText editTextPassword = (EditText) findViewById(R.id.editTextPasswordToLogin);
-        final AlphaAnimation inAnimation = new AlphaAnimation(0f, 1f);
-        final AlphaAnimation outAnimation = new AlphaAnimation(1f, 0f);
-
         final FrameLayout progressBarHolder = (FrameLayout) findViewById(R.id.progressBarHolder);
         Button btnSignIn = (Button) findViewById(R.id.buttonSignIn);
         System.out.println("Frame Layout-> " + progressBarHolder);
@@ -52,21 +49,17 @@ public class LoginActivity extends Activity {
                     @Override
                     protected void onPreExecute() {
                         super.onPreExecute();
-                        inAnimation.setDuration(200);
-                        progressBarHolder.setAnimation(inAnimation);
                         progressBarHolder.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     protected String doInBackground(Void... params) {
-                        return HttpCalls.getHttp("http://" + HOST_IP + ":" + HOST_PORT + "/login?username=" + userName + "&password=" + password);
+                        return HttpCalls.getHttp("https://" + HOST_IP  + "/login?username=" + userName + "&password=" + password);
                     }
 
                     @Override
                     protected void onPostExecute(String response) {
                         super.onPostExecute(response);
-                        outAnimation.setDuration(200);
-                        progressBarHolder.setAnimation(outAnimation);
                         progressBarHolder.setVisibility(View.GONE);
                         System.out.println("Http Response-> " + response.toString());
                         try {

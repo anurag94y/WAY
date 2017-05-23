@@ -52,7 +52,7 @@ public class UserLocation {
             @Override
             protected String doInBackground(Void... params) {
                 if (location != null) {
-                    return HttpCalls.putHttp("http://" + HOST_IP + ":" + HOST_PORT + "/location", new Gson().toJson(location));
+                    return HttpCalls.putHttp("http://" + HOST_IP + "/location", new Gson().toJson(location));
                 } else {
                     return "";
                 }
