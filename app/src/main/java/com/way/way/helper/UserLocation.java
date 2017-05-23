@@ -29,11 +29,21 @@ public class UserLocation {
 
 
 
-    public void addUserLocation(final String username, final GoogleMap mMap, final Context context) {
+    public void addUserLocation(final String username, final GoogleMap mMap, final Context context, final LatLng latLng) {
         new AsyncTask<Void, Void, String>() {
+            Location location = null;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                try {
+                    location = new Location();
+                    location.setUsername(username);
+                    System.out.println("Latlng -> " + latLng);
+                    location.setLatitude(latLng.latitude);
+                    location.setLongitude(latLng.longitude);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 //inAnimation.setDuration(200);
                 //progressBarHolder.setAnimation(inAnimation);
                 //progressBarHolder.setVisibility(View.VISIBLE);
@@ -41,7 +51,11 @@ public class UserLocation {
 
             @Override
             protected String doInBackground(Void... params) {
-                return HttpCalls.getHttp("http://" + HOST_IP + ":" + HOST_PORT + "/location?username=" + username);
+                if (location != null) {
+                    return HttpCalls.putHttp("http://" + HOST_IP + "/location", new Gson().toJson(location));
+                } else {
+                    return "";
+                }
             }
 
             @Override
@@ -55,8 +69,8 @@ public class UserLocation {
                     Location location = new Gson().fromJson(response, Location.class);
                     if (location != null) {
                         Toast.makeText(context, "Congrats: User Location Added", Toast.LENGTH_LONG).show();
-                        Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title(username));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),  location.getLongitude()), 15));
+                        Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(username));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12 ));
                         MainActivity.updateMarker(marker);
                     } else {
                         Toast.makeText(context, "User Name or Password does not match in Location", Toast.LENGTH_LONG).show();
