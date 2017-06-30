@@ -40,6 +40,16 @@ public class RegisterActivity extends Activity{
     private TextView error;
 
 
+    boolean isPasswordEqualWithConfirmPassword(final EditText password, final EditText confirmPassword) {
+        // TO-DO Need to check on basis of hash value not plain text and will store password hash value.
+        return password.getText()
+                       .toString()
+                       .equals(
+                               confirmPassword.getText()
+                                              .toString()
+                       );
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +71,7 @@ public class RegisterActivity extends Activity{
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (!password.getText().equals(confirmPassword.getText())) {
+                if (!isPasswordEqualWithConfirmPassword(password, confirmPassword)) {
                     error.setText("Password and Confirm Password should be same !");
                 }
                 //Todo: Add condition for username Unique, password and emailId
